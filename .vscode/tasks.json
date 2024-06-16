@@ -2,10 +2,15 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Sail List",
+            "label": "Install Composer Packages",
             "type": "shell",
-            "command": "./vendor/bin/sail",
-            "args": ["--list"],
+            "command": "${workspaceFolder}/.docker/install_composer_packages.sh",
+            "problemMatcher": []
+        },
+        {
+            "label": "Create Sail Alias",
+            "type": "shell",
+            "command": "${workspaceFolder}/.docker/sail_alias.sh",
             "problemMatcher": []
         }
     ]
