@@ -1,0 +1,29 @@
+name: Deploy Laravel Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan ${{ secrets.SERVER_ADDRESS }} >> ~/.ssh/known_hosts
+
+      - name: Run deployment script
+        env:
+          SERVER_ADDRESS: ${{ secrets.SERVER_ADDRESS }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          APP_PATH: ${{ secrets.APP_PATH }}
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_ADDRESS }} 'bash -s' < ./scripts/deploy.sh
