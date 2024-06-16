@@ -27,4 +27,4 @@ jobs:
           APP_PATH: ${{ secrets.APP_PATH }}
           PRODUCTION_ENV: ${{secrets.PRODUCTION_ENV_FILE_PATH}}
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_ADDRESS }} 'bash -s' < ./scripts/deploy.sh
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_ADDRESS }} 'bash -s' < ./.github/scripts/deploy.sh
