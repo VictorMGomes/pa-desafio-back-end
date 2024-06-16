@@ -1,0 +1,4 @@
+{
+    "recommendations": ["amiralizadeh9480.laravel-extra-intellisense"],
+    "unwantedRecommendations": ["bmewburn.vscode-intelephense-client"]
+}

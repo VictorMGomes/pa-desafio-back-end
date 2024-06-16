@@ -1,0 +1,12 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Sail List",
+            "type": "shell",
+            "command": "./vendor/bin/sail",
+            "args": ["--list"],
+            "problemMatcher": []
+        }
+    ]
+}
