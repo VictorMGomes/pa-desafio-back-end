@@ -4,13 +4,13 @@
         {
             "label": "Install Composer Packages",
             "type": "shell",
-            "command": "${workspaceFolder}/.docker/install_composer_packages.sh",
+            "command": "${workspaceFolder}/.docker/scripts/install_composer_packages.sh",
             "problemMatcher": []
         },
         {
             "label": "Create Sail Alias",
             "type": "shell",
-            "command": "${workspaceFolder}/.docker/sail_alias.sh",
+            "command": "${workspaceFolder}/.docker/scripts/define_sail_alias.sh",
             "problemMatcher": []
         }
     ]
