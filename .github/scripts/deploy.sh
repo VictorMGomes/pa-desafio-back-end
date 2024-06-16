@@ -6,6 +6,9 @@ APP_PATH=${APP_PATH}
 # Navigate to the application path
 cd $APP_PATH
 
+#Copy production .ENV file
+cp $PRODUCTION_ENV $APP_PATH
+
 # Pull the latest changes from the repository
 git pull origin main
 
