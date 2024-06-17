@@ -19,10 +19,10 @@ jobs:
           echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_ed
           chmod 600 ~/.ssh/id_ed
 
-          # Remove chave ofensiva se existir
+          touch ~/.ssh/known_hosts
+
           ssh-keygen -f "/home/runner/.ssh/known_hosts" -R ${{ secrets.SERVER_ADDRESS }}
 
-          # Adiciona nova chave do host
           ssh-keyscan -H ${{ secrets.SERVER_ADDRESS }} >> ~/.ssh/known_hosts
 
       - name: Run deployment script
