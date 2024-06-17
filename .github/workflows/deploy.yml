@@ -18,7 +18,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          touch ~/.ssh/known_hosts
+
+      - name: Add server to known_hosts
+        run: |
           ssh-keyscan ${{ secrets.SERVER_ADDRESS }} > ~/.ssh/known_hosts
 
       - name: Run deployment script
@@ -27,12 +29,29 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           APP_PATH: ${{ secrets.APP_PATH }}
           PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV_FILE_PATH }}
+          REPOSITORY: ${{ secrets.REPOSITORY }}
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_ADDRESS }} "bash -c 'cd $APP_PATH && \
-            git pull origin main && \
-            composer install --no-dev --no-progress --prefer-dist && \
-            [[ -n $PRODUCTION_ENV ]] && cp $PRODUCTION_ENV .env && \
-            php artisan migrate --force && \
-            php artisan config:cache && \
-            php artisan route:cache && \
-            php artisan view:cache'"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_ADDRESS }} "bash -c '
+            set -e
+
+            if [ -d \"$APP_PATH/.git\" ]; then
+              cd $APP_PATH
+              git pull origin main
+            else
+              git clone $REPOSITORY $APP_PATH
+              cd $APP_PATH
+            fi
+
+            composer install --no-dev --no-progress --prefer-dist
+
+            if [ -n \"$PRODUCTION_ENV\" ]; then
+              cp $PRODUCTION_ENV .env
+            fi
+
+            php artisan migrate --force
+            php artisan db:seed --force
+
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+          '"
