@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd "$APP_PATH" || exit
+cd "$APP_PATH"
 
 git pull origin main
 
