@@ -1,19 +1,17 @@
 #!/bin/bash
 
-cd "$APP_PATH"
+cd $APP_PATH
 
-touch test.txt
+git pull origin main
 
-#git pull origin main
+omposer install --no-dev --no-progress --prefer-dist
 
-#composer install --no-dev --no-progress --prefer-dist
+if [ -n $PRODUCTION_ENV ]; then
+  cp $PRODUCTION_ENV .env
+fi
 
-#if [ -n "$PRODUCTION_ENV" ]; then
-#  cp "$PRODUCTION_ENV" .env
-#fi
+php artisan migrate --force
 
-#php artisan migrate --force
-
-#php artisan config:cache
-#php artisan route:cache
-#php artisan view:cache
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
