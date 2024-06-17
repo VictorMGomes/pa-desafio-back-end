@@ -1,19 +1,21 @@
 #!/bin/bash
 
+set -e
+
 # Define the application path from GitHub Secrets
 APP_PATH=${APP_PATH}
 
 # Navigate to the application path
 cd $APP_PATH
 
-#Copy production .ENV file
-cp $PRODUCTION_ENV $APP_PATH
-
 # Pull the latest changes from the repository
 git pull origin main
 
 # Install/update Composer dependencies
 composer install --no-interaction --prefer-dist --optimize-autoloader
+
+# Copy production .ENV file
+cp ${PRODUCTION_ENV} ${APP_PATH}
 
 # Run database migrations
 php artisan migrate --force
