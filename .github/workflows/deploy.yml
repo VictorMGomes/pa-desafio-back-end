@@ -39,14 +39,22 @@ jobs:
               git pull origin main
             else
               git clone $REPOSITORY $APP_PATH
+              chmod 755 $APP_PATH
               cd $APP_PATH
             fi
+
+            find . -type d -exec chmod 755 {} \;
+            find . -type f -exec chmod 644 {} \;
+            chmod -R 775 ./storage
+            chmod -R 775 ./bootstrap/cache
 
             composer install --no-dev --no-progress --prefer-dist
 
             if [ -n \"$PRODUCTION_ENV\" ]; then
               cp $PRODUCTION_ENV .env
             fi
+
+            chmod 644 .env
 
             php artisan migrate --force
             php artisan db:seed --force
