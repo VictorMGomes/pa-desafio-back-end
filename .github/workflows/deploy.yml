@@ -28,4 +28,11 @@ jobs:
           APP_PATH: ${{ secrets.APP_PATH }}
           PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV_FILE_PATH }}
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_ADDRESS }} 'bash -s' < ./.github/scripts/deploy.sh
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_ADDRESS }} "bash -c 'cd $APP_PATH && \
+            git pull origin main && \
+            composer install --no-dev --no-progress --prefer-dist && \
+            [[ -n $PRODUCTION_ENV ]] && cp $PRODUCTION_ENV .env && \
+            php artisan migrate --force && \
+            php artisan config:cache && \
+            php artisan route:cache && \
+            php artisan view:cache'"
