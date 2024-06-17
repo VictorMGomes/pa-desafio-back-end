@@ -16,8 +16,13 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_ed
+          chmod 600 ~/.ssh/id_ed
+
+          # Remove chave ofensiva se existir
+          ssh-keygen -f "/home/runner/.ssh/known_hosts" -R ${{ secrets.SERVER_ADDRESS }}
+
+          # Adiciona nova chave do host
           ssh-keyscan -H ${{ secrets.SERVER_ADDRESS }} >> ~/.ssh/known_hosts
 
       - name: Run deployment script
@@ -27,4 +32,4 @@ jobs:
           APP_PATH: ${{ secrets.APP_PATH }}
           PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV_FILE_PATH }}
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_ADDRESS }} 'bash -s' < ./.github/scripts/deploy.sh
+          ssh -i ~/.ssh/id_ed -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_ADDRESS }} 'bash -s' < ./.github/scripts/deploy.sh
