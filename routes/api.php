@@ -1,15 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\UserController;
 
-/* Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum'); */
-
-Route::get('/users', function (Request $request) {
-    return $request->user();
-});
-
-Route::post('register', [AuthController::class, 'register']);
+Route::get('/users/{ID}', [UserController::class, 'get']);
+Route::get('/users', [UserController::class, 'getAll']);
+Route::post('/users', [UserController::class, 'create']);
+Route::put('/users/{ID}', [UserController::class, 'update']);
