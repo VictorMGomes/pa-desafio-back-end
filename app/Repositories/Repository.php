@@ -33,8 +33,10 @@ abstract class Repository
         $item = $this->model->find($id);
         if ($item) {
             $item->update($data);
+
             return $item;
         }
+
         return null;
     }
 
@@ -43,8 +45,10 @@ abstract class Repository
         $item = $this->model->find($id);
         if ($item) {
             $item->delete();
+
             return true;
         }
+
         return false;
     }
 }
