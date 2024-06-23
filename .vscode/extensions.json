@@ -1,4 +1,7 @@
 {
-    "recommendations": ["amiralizadeh9480.laravel-extra-intellisense"],
+    "recommendations": [
+        "amiralizadeh9480.laravel-extra-intellisense",
+        "open-southeners.laravel-pint"
+    ],
     "unwantedRecommendations": ["bmewburn.vscode-intelephense-client"]
 }
