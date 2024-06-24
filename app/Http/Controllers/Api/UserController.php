@@ -8,17 +8,17 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function get(Request $request)
+    public function show(Request $request)
     {
         return User::findOrFail($request->route('ID'));
     }
 
-    public function getAll(Request $request)
+    public function index(Request $request)
     {
         return User::all();
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => ['required', 'string'],
