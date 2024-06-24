@@ -70,3 +70,9 @@ para
 #### Execute as seeds
 
 `s artisan db:seed`
+
+## Deploy
+
+#### este projeto têm Worflow de deploy automatico da branch main via GitHub Actions
+
+Edite o arquivo ".github/workflows/deploy.yml" conforme sua necessidade.
