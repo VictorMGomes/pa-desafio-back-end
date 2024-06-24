@@ -1,66 +1,72 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# pa-desafio-back-end
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## CMS (Content Management System)
 
-## About Laravel
+Uma aplicação simples de gerenciamento de posts
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Live preview do projeto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+https://soffia.victormgomes.net/
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instruções de execução
 
-## Learning Laravel
+#### Importe a collection e documentação da API no postman ou outro cliente de sua preferência
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+arquivo na raiz do projeto "pa-desafio-back-end.json"
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Como executar o projeto de forma local
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Requisitos
 
-## Laravel Sponsors
+#### Docker e Docker Composer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Este projeto é executado via containers: https://docs.docker.com/
+Obs: Mas também pode ser utilizado sem dockerização, sendo necessária a instalação manual da stack LAMP.
+Verificar o composer.json.
 
-### Premium Partners
+#### Recomendado o uso de Linux ou WSL
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Para as instruções de comando, outras plataformas talvez necessitem de adaptações.
 
-## Contributing
+#### Laravel Sail
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Este projeto é executado utilizando Laravel Sail: https://laravel.com/docs/11.x/sail
 
-## Code of Conduct
+### Instruções
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### Clone o repositório e abra o projeto, preferencialmente com o VSCODE.
 
-## Security Vulnerabilities
+#### Copie o arquivo .env.example e renomei para .env e altere as variais que deseja
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+`cp .env.example .env`
 
-## License
+#### Instale os pacotes
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+por meio da task "Install Composer Packages" configurada para o vscode
+
+#### ou executando o script "install_composer_packages.sh"
+
+`/.docker/scripts/install_composer_packages.sh`
+
+#### Se deseja crie o alias do sail por meio da task "Create Sail Alias"
+
+alias de
+`./vendor/bin/sail`
+para
+`s`
+
+#### Execute o projeto
+
+`s up -d`
+
+#### Gere a chave da aplicação
+
+`s artisan key:generate`
+
+#### Execute as migrations
+
+`s artisan migrate`
+
+#### Execute as seeds
+
+`s artisan db:seed`
