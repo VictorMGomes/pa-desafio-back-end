@@ -11,53 +11,38 @@
         }
     ],
     "paths": {
-        "/api/user": {
+        "/api/users/{ID}": {
             "get": {
                 "tags": [
-                    "User"
+                    "Users"
                 ],
-                "summary": "Get Users",
-                "operationId": "c100283a312ea05ad6f3bad18a9967c2",
+                "summary": "Get a user by ID",
+                "description": "Returns a single user",
+                "operationId": "49bb4e982075a086c8ab0e3b317c4fcc",
+                "parameters": [
+                    {
+                        "name": "ID",
+                        "in": "path",
+                        "description": "ID of the user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successful operation",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "rows": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "number",
-                                                        "example": "1"
-                                                    },
-                                                    "name": {
-                                                        "type": "string",
-                                                        "example": "Aderson Felix"
-                                                    },
-                                                    "email": {
-                                                        "type": "email",
-                                                        "example": "example@domain.com"
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "example": "2023-02-23T00:09:16.000000Z"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "example": "2023-02-23T12:33:45.000000Z"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "User"
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "User not found"
                     }
                 }
             }
