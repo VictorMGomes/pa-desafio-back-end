@@ -13,6 +13,7 @@ https://soffia.victormgomes.net/
 #### Importe a collection e documentação da API no postman ou outro cliente de sua preferência
 
 arquivo na raiz do projeto "pa-desafio-back-end.json"
+obs: alterar a variável base_url de acordo com o endereço live preview ou local
 
 ## Como executar o projeto de forma local
 
